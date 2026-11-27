@@ -14,9 +14,9 @@ const fs = require('fs');
 // No letters, no browser or editor marks, no globe or compass.
 // `node icon.js` writes the shipped files (assets/icon.png, the splash icons,
 // the Android foreground, the favicon and the website icons) from CHOSEN.
-// Until Brian picks, CHOSEN is null and the shipped files are a plain teal
-// stand-in tile with a page outline.
-const CHOSEN = null;
+// Brian picked 1, Folio, on Nov 27, 2026. The option sheet stays in
+// docs/design for the record; standIn() is kept for it.
+const CHOSEN = 'folio';
 
 const ROOT = path.join(__dirname, '..');
 const INK = '#16171A';

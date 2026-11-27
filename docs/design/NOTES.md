@@ -46,7 +46,14 @@ Nothing here is Cash Counter's: no steel tray, no deposit-slip blue, no amber, n
 
 ## Icon
 
-Not chosen. Three concepts in `icon-options.png`, each large and at 60 px on a light and a dark wallpaper, drawn by `store/icon.js` (`node icon.js options`). Until Brian picks, assets/icon.png and the other shipped icon files are a plain teal stand-in tile with a page outline (`CHOSEN = null`).
+**Chosen (Nov 27, 2026): 1, Folio.** A white page with a folded corner on the reading-lamp teal (#0B6E66): text lines in its top half, teal code brackets and an ink slash in its lower half. `CHOSEN = 'folio'` in `store/icon.js`; `node store/icon.js` writes every shipped file from it:
+
+- `assets/icon.png`: 1024x1024, RGB with no alpha channel, square corners (iOS rounds them)
+- `assets/android-icon-foreground.png`: the mark at 62% in the middle of the same teal; app.json `android.adaptiveIcon.backgroundColor` is the same #0B6E66
+- `assets/splash-icon.png` and `splash-icon-dark.png`: the tile with rounded corners on paper (light) or graphite (dark)
+- `assets/favicon.png`, `docs/apple-touch-icon.png` (180, square) and `docs/icon-512.png` (rounded), the logo on every website page
+
+No app screen draws the icon, so no render in `after/` changed. The option sheet stays for the record. The three concepts, each large and at 60 px on a light and a dark wallpaper in `icon-options.png` (`node icon.js options`):
 
 1. Folio: a white page with a folded corner on the teal: text lines in its top half, code brackets in its lower half. The page and its code, the app's two views; the strongest at 60 px on both wallpapers.
 2. Brackets: large mint angle brackets framing a small paper page, on ink. Says "code" fastest; the most like what is already in the category.

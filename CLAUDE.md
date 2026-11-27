@@ -52,6 +52,6 @@ App #20 in Brian's iOS app portfolio (seller bkdigitalleads-cmyk). Expo SDK 57, 
 - Type check: `npx tsc --noEmit`. Unit checks: `npm test`. Bundle check: `npx expo export --platform ios`. Config: `npx expo config --type introspect`.
 - Pure logic has no React or native imports (it imports with a `.ts` extension so Node runs it directly), so `npm test` checks exactly what the app runs.
 - The open-a-file proof, part (c), without a phone: `node store/page-proof.mjs` (needs Playwright with Chromium) loads the app's page copy of the bundled sample, with its style sheet and picture beside it, by file:// URL, and checks that they load, that a page script stays off, that a web picture is blocked, and that find works with no script. Screenshots and results in docs/design/proof/.
-- Icon concepts: `cd store && npm install && node icon.js options`; `node icon.js` writes the shipped icons from `CHOSEN` (null until Brian picks; the shipped files are a plain teal stand-in).
+- Icon: `cd store && npm install && node icon.js` writes the shipped icons from `CHOSEN`, which is 'folio' (Brian's pick, Nov 27, 2026); change it only when Brian picks again. `node icon.js options` redraws the option sheet.
 - Simulator (needs Xcode): Expo Go does not work (RevenueCat needs a development build). Purchases do not complete in the simulator. Open in from Mail needs a device.
 - Real-device check: TestFlight build from the EAS workflow, on Brian's iPhone. NOTES.md has the TestFlight checklist.

@@ -2,6 +2,11 @@
 
 Newest first. One entry per commit: date, version/build, what changed and why, and how it was checked.
 
+- 2026-11-27: 1.0.0 build 1, the app icon (same branch and PR 1, no merge, no EAS; version and build number unchanged).
+  - Brian picked option 1, Folio: a white page with a folded corner on the teal, text lines above code brackets. store/icon.js `CHOSEN = 'folio'`, and `node store/icon.js` wrote assets/icon.png (1024x1024, RGB, no alpha, square corners), the Android adaptive foreground (on the same teal as app.json's adaptive background, #0B6E66), both splash icons, the favicon, docs/apple-touch-icon.png and docs/icon-512.png. The website's logo alt text now says what the icon shows. No app screen draws the icon, so no render changed; the option sheet stays in docs/design.
+  - Brian's decisions on the five open calls: all stay as they are (the fourth-file paywall at most once per launch; the paywall from folders and source themes; a file shared on first launch waits behind onboarding; the reminder screen's notification ask only when a trial is offered; sample prices in the renders only).
+  - Checked: `npx tsc --noEmit` clean; `npm test` passing (new: CHOSEN is 'folio', assets/icon.png's corner is the teal, the adaptive background matches, the website alt text); `npx expo export --platform ios` bundles. The shipped files were looked at side by side.
+
 - 2026-11-27: 1.0.0 build 1, the whole first version (branch claude/html-1.0.0, PR 1, not merged; nothing built with EAS, nothing spent).
   - Why this app: keyword research found html viewer at about 980 to 1,170 US searches a day, html 1,141, text editor 1,141 and code editor 825; four apps in the top 10 for html viewer are under a year old and one of them earns. The people searching have a file they cannot read (an .html attachment from a bank, a report, an exported chat, a saved page, a school assignment), and iOS shows these badly or not at all. Secondary users are students and hobbyists editing HTML on a phone.
   - The open-a-file proof, done first (details in the PR and under "The open-a-file proof" below): (a) app.json declares the document types and Expo SDK 57 writes them into Info.plist from app.json alone, no config plugin; (b) a handed-over file reaches the app as a file URL and is copied into the app's own folder; (c) a page with a relative style sheet and picture renders from the app's copy, checked in Chromium by `node store/page-proof.mjs`.
@@ -53,12 +58,11 @@ What needs TestFlight: that the app shows in the share sheet and Open in from Ma
 - Text size is CSS zoom on the page, so the layout reflows like the browser's page zoom rather than only the text growing.
 - The editor is a plain text field: no coloring and no line numbers while typing. Smart quotes are expected to be off (autocorrect off); check on the device.
 - Saving writes UTF-8. A file that declared another character set keeps its own meta tag in the saved file; in the app it shows fine (the page copy says UTF-8), but another app reading the saved file could read the old character set.
-- The fourth-file paywall opens at most once per launch so reading an attachment is never interrupted twice; the brief says "on a fourth recent file being kept". Say if it should open every time, as Cash Counter's fourth save does.
-- The paywall also opens from folders and source themes (both Pro), besides Edit, the second PDF, the fourth file and Settings.
+- The fourth-file paywall opens at most once per launch so reading an attachment is never interrupted twice; the brief says "on a fourth recent file being kept". Kept: Brian's decision, Nov 27.
+- The paywall also opens from folders and source themes (both Pro), besides Edit, the second PDF, the fourth file and Settings. Kept: Brian's decision, Nov 27.
 - The rating ask is once ever per trigger (the engine's rule); the brief says at most one per launch, which once ever also meets.
-- A file shared in on the very first launch waits behind onboarding and its paywall, then opens. Skipping onboarding for that first file would read better; it changes the paywall sequence, so it is Brian's call.
-- The onboarding reminder screen asks for notification permission, but only when a free trial is on offer (the engine's sequence). The app itself needs no permission.
-- The brief gives no prices. The renders use Cash Counter's ($4.99 a week with 3 days free, $19.99 a year, $24.99 once) as samples only.
+- A file shared in on the very first launch waits behind onboarding and its paywall, then opens. Kept: Brian's decision, Nov 27.
+- The onboarding reminder screen asks for notification permission, but only when a free trial is on offer (the engine's sequence). The app itself needs no permission. Kept: Brian's decision, Nov 27.
+- The brief gives no prices. The renders use Cash Counter's ($4.99 a week with 3 days free, $19.99 a year, $24.99 once) as samples only. Kept: Brian's decision, Nov 27.
 - The design renders come from a react-native-web copy: the iOS keyboard and the code-key row, the system paste button, the share and print sheets and WebKit's PDF view are not in them; a word longer than the line in Source breaks on the phone but not in the web render (line 5 of 04-source).
 - The code font's file names and licence carry its maker's name (assets/fonts); it is not shown anywhere a person reads.
-- The shipped icon files are a plain teal stand-in until Brian picks one of the three options.

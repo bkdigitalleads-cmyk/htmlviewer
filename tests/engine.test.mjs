@@ -253,7 +253,7 @@ test('design: every source theme color reads at 4.5:1 on its background', () => 
   }
 });
 
-test('design renders: the screens the brief asks for, at 393x852 points, light and dark; three icon options, none picked', () => {
+test('design renders: the screens the brief asks for, at 393x852 points, light and dark; three icon options, Folio picked', async () => {
   const want = ['01-home', '03-page', '04-source', '05-find-in-page', '07-editor', '08-pdf-export', '09-paywall-in-app', '10-paywall-onboarding', '11-settings', '12-onboarding-1', '13-onboarding-2', '14-onboarding-3'];
   for (const w of want) {
     for (const mode of ['light', 'dark']) {
@@ -266,12 +266,25 @@ test('design renders: the screens the brief asks for, at 393x852 points, light a
   const sheet = readFileSync(`${ROOT}docs/design/icon-options.png`);
   assert.deepEqual([sheet.readUInt32BE(16), sheet.readUInt32BE(20)], [1500, 820]);
   const icon = read('store/icon.js');
-  assert.match(icon, /const CHOSEN = null;/, 'Brian picks');
+  assert.match(icon, /const CHOSEN = 'folio';/, 'Brian picked 1, Folio, Nov 27');
   for (const v of ['folio', 'brackets', 'lens']) assert.match(icon, new RegExp(`\\n  ${v}: \\(\\) =>`), v);
   assert.ok(!/<text/.test(icon.slice(icon.indexOf('const art = {'), icon.indexOf('/** The stand-in'))), 'no letters on the concepts');
   const raw = readFileSync(`${ROOT}assets/icon.png`);
   assert.deepEqual([raw.readUInt32BE(16), raw.readUInt32BE(20)], [1024, 1024]);
   assert.equal(raw[25], 2, 'RGB with no alpha');
+  // Square corners in the Folio teal (iOS rounds them).
+  const { inflateSync } = await import('node:zlib');
+  const parts = [];
+  for (let at = 8; at < raw.length; ) {
+    const len = raw.readUInt32BE(at);
+    if (raw.toString('latin1', at + 4, at + 8) === 'IDAT') parts.push(raw.subarray(at + 8, at + 8 + len));
+    at += 12 + len;
+  }
+  const row0 = inflateSync(Buffer.concat(parts)).subarray(0, 4);
+  // The first pixel of the first row reads as drawn whatever the row's filter (nothing above or to its left).
+  assert.deepEqual([...row0.subarray(1, 4)], [0x0b, 0x6e, 0x66], 'top left corner is the teal tile');
+  assert.equal(JSON.parse(read('app.json')).expo.android.adaptiveIcon.backgroundColor, '#0B6E66');
+  for (const f of ['index.html', 'privacy.html', 'support.html']) assert.match(read(`docs/${f}`), /alt="HTML Viewer app icon: a white page with text lines above code brackets, on teal"/, f);
 });
 
 test('the open-a-file proof in Chromium passed and its screenshots are in the repo', () => {
