@@ -1,0 +1,10 @@
+ok   relative style sheet css/style.css applies: Georgia, serif | rgb(251, 250, 246)
+ok   relative picture images/harvest.svg loads: naturalWidth 300
+ok   a script in the page does not run with Scripts off: title "Garden club, spring report"
+ok   nothing is fetched from the web with Web content off: https://example.com/tracker.png (csp)
+ok   the web picture stays empty
+ok   the copy reads as UTF-8: UTF-8
+ok   find in page marks every match: 2 marks for "beds"
+ok   the current match is reached by the URL fragment, with no script: hv-find-1 rgb(240, 154, 62)
+ok   the dark page and text size apply as CSS: invert(1) hue-rotate(180deg)
+ok   with Scripts on, the page script runs
