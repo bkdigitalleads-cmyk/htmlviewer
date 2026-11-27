@@ -2,9 +2,13 @@
 
 Newest first. One entry per commit: date, version/build, what changed and why, and how it was checked.
 
+- 2026-11-27: 1.0.0 build 1, the last value from Cowork (same branch and PR 1, no merge, no EAS; version and build number unchanged).
+  - app.json `extra.eas.projectId` is f4e0213b-9022-407e-b858-a279a12c1a05 (Expo project bkdeveloper123/htmlviewer); owner bkdeveloper123 and slug htmlviewer already matched. No placeholder is left anywhere in the repo; the placeholder test now checks that across the app, config, docs, store, notes, tests, workflows and plugins.
+  - Checked: `npx tsc --noEmit` clean; `npm test` passing; `npx expo config --type introspect` shows the project id, owner, slug, `ios.entitlements` `{}` and both document types.
+
 - 2026-11-27: 1.0.0 build 1, setup values from Cowork (same branch and PR 1, no merge, no EAS; version and build number unchanged).
   - app.json `extra.revenueCatApiKeyIos` is the public RevenueCat iOS SDK key (starts with `appl_`), so src/purchases.ts configures RevenueCat and the paywalls show the store's products. eas.json `ascAppId` is 6840171425, and the website's App Store links (docs/index.html, the button and the structured data) point at apps.apple.com/app/id6840171425. store/metadata.md and CLAUDE.md say the same.
-  - Still a placeholder: app.json `extra.eas.projectId` (TODO_COWORK_EAS_PROJECT_ID); Cowork sends it later.
+  - Still a placeholder then: app.json `extra.eas.projectId`; Cowork sent it next.
   - Checked: `npx tsc --noEmit` clean; `npm test` passing (the config test now checks the key, its `appl_` start, the app id, the website link, and that the project id is still the marked placeholder); `npx expo config --type introspect` shows the key and `ios.entitlements` `{}`.
 
 - 2026-11-27: 1.0.0 build 1, the app icon (same branch and PR 1, no merge, no EAS; version and build number unchanged).

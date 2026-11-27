@@ -2,7 +2,7 @@
 
 Everything here is pasted into App Store Connect by Brian and Cowork. No em dashes anywhere, no brand names of browsers, editors or other companies' products, no "Unlock", "Premium", "Seamless", "Effortless", "Welcome", "Let's" or exclamation marks.
 
-App record: bundle id com.bwk.htmlviewer, SKU htmlviewer, ASC app id 6840171425 (eas.json `ascAppId`, from Cowork, Nov 27). RevenueCat public iOS key in app.json `extra.revenueCatApiKeyIos` (from Cowork, Nov 27; starts with `appl_`). Expo project bkdeveloper123/htmlviewer (projectId TODO_COWORK_EAS_PROJECT_ID, app.json `extra.eas.projectId`).
+App record: bundle id com.bwk.htmlviewer, SKU htmlviewer, ASC app id 6840171425 (eas.json `ascAppId`, from Cowork, Nov 27). RevenueCat public iOS key in app.json `extra.revenueCatApiKeyIos` (from Cowork, Nov 27; starts with `appl_`). Expo project bkdeveloper123/htmlviewer (projectId f4e0213b-9022-407e-b858-a279a12c1a05, app.json `extra.eas.projectId`, from Cowork, Nov 27).
 
 ## Name (24/30)
 HTML Viewer: Code Editor

@@ -63,7 +63,16 @@ test('the open-a-file path: file URLs from Linking are kept as the app’s own c
 
 // ---------- config ----------
 
-test('app.json: identity as briefed, iPhone only, no permissions, push entitlement plugin last, placeholders marked', () => {
+test('placeholders: none left anywhere in the repo', () => {
+  const mark = new RegExp(['TODO', 'COWORK'].join('_'));
+  const files = [
+    'app.json', 'eas.json', 'package.json', 'App.tsx', 'index.ts', 'CLAUDE.md', 'AGENTS.md', 'NOTES.md', 'README.md',
+    ...[...walk(`${ROOT}src`, ['.ts', '.tsx']), ...walk(`${ROOT}docs`, ['.html', '.md', '.xml', '.txt']), ...walk(`${ROOT}store`, ['.md', '.js', '.mjs']), ...walk(`${ROOT}tests`, ['.mjs']), ...walk(`${ROOT}.eas`, ['.yml']), ...walk(`${ROOT}plugins`, ['.js'])].map((f) => f.slice(ROOT.length)),
+  ];
+  assert.deepEqual(files.filter((f) => mark.test(read(f))), []);
+});
+
+test('app.json: identity as briefed, iPhone only, no permissions, push entitlement plugin last, the store values from Cowork', () => {
   const app = JSON.parse(read('app.json')).expo;
   assert.equal(app.name, 'HTML Viewer');
   assert.equal(app.slug, 'htmlviewer');
@@ -80,12 +89,13 @@ test('app.json: identity as briefed, iPhone only, no permissions, push entitleme
   assert.equal(eas.cli.appVersionSource, 'local');
   assert.equal(eas.build.production.autoIncrement, false);
   // From Cowork, Nov 27: the public RevenueCat SDK key and the App Store Connect app id. The Expo project id comes later.
-  assert.equal(app.extra.eas.projectId, 'TODO_COWORK_EAS_PROJECT_ID');
   assert.equal(app.extra.revenueCatApiKeyIos, 'appl_rXkJBNNdImKNPGiWKuHznPFxTvK');
   assert.match(app.extra.revenueCatApiKeyIos, /^appl_[A-Za-z0-9]+$/, 'the public iOS SDK key, so purchases turn on');
   assert.equal(eas.submit.production.ios.ascAppId, '6840171425');
-  assert.equal(app.extra.eas.projectId, 'TODO_COWORK_EAS_PROJECT_ID', 'still to come from Cowork');
-  assert.match(read('src/purchases.ts'), /!apiKey\.startsWith\('appl_'\)/, 'with the placeholder in place, purchases stay off instead of configuring junk');
+  // Expo project bkdeveloper123/htmlviewer, from Cowork, Nov 27.
+  assert.equal(app.extra.eas.projectId, 'f4e0213b-9022-407e-b858-a279a12c1a05');
+  assert.match(app.extra.eas.projectId, /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);
+  assert.match(read('src/purchases.ts'), /!apiKey\.startsWith\('appl_'\)/, 'without a real key, purchases stay off instead of configuring junk');
   assert.match(read('.eas/workflows/deploy.yml'), /branches: \['main'\]/, 'nothing builds from a branch');
 });
 
