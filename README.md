@@ -1,5 +1,9 @@
-# HTML Viewer (htmlviewer)
+# HTML Viewer
 
-Engine base for app 20, HTML Viewer, forked from Cash Counter (bkdigitalleads-cmyk/cashcounter, main at 84c3ba6, Nov 27, 2026).
+An HTML viewer and code editor for the iPhone: open the .html file you were sent (from Mail, Files or Messages), read it like a page, see and search its code, edit it with the page live above it, and save it as a PDF. No account, no server: the app keeps its own copy of each file on the phone, and a page can only read the files in its own folder.
 
-This first commit holds only the engine pieces that carry over unchanged: the RevenueCat wrapper with the foreground Pro re-check (src/purchases.ts), the trial and plan rules (src/trial.ts, src/offer.ts), the trial reminder (src/reminder.ts), the test-build check (src/testing.ts), the startup guard (index.ts), the EAS workflows, eas.json, and plugins/withoutPushEntitlement.js. It is not an app yet; the app arrives on branch claude/html-1.0.0 by pull request. Rules: AGENTS.md, and CLAUDE.md on that branch.
+- App: Expo SDK 57, React Native, TypeScript. `npm install`, then `npx tsc --noEmit` and `npm test`.
+- Website: `docs/` (GitHub Pages): landing page, privacy policy, support with questions and answers.
+- Store listing: `store/metadata.md`. Icon concepts: `cd store && npm install && node icon.js options`. The open-a-file proof in Chromium: `node store/page-proof.mjs`.
+- Design: `docs/design/NOTES.md`, with the renders and the icon options.
+- Rules for working in this repo: `CLAUDE.md`. Change log and TestFlight checklist: `NOTES.md`.
