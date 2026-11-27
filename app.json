@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "HTML Viewer",
+    "slug": "htmlviewer",
+    "scheme": "htmlviewer",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.bwk.htmlviewer",
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "LSApplicationCategoryType": "public.app-category.developer-tools"
+      }
+    },
+    "android": {
+      "package": "com.bwk.htmlviewer",
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-font",
+      "expo-sqlite",
+      "expo-localization",
+      "./plugins/withoutPushEntitlement"
+    ],
+    "extra": {
+      "revenueCatApiKeyIos": "TODO_COWORK_REVENUECAT_PUBLIC_IOS_KEY",
+      "eas": {
+        "projectId": "TODO_COWORK_EAS_PROJECT_ID"
+      }
+    },
+    "owner": "bkdeveloper123"
+  }
+}
