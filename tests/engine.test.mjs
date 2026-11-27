@@ -79,10 +79,12 @@ test('app.json: identity as briefed, iPhone only, no permissions, push entitleme
   const eas = JSON.parse(read('eas.json'));
   assert.equal(eas.cli.appVersionSource, 'local');
   assert.equal(eas.build.production.autoIncrement, false);
-  // Cowork fills these before the first build.
+  // From Cowork, Nov 27: the public RevenueCat SDK key and the App Store Connect app id. The Expo project id comes later.
   assert.equal(app.extra.eas.projectId, 'TODO_COWORK_EAS_PROJECT_ID');
-  assert.equal(app.extra.revenueCatApiKeyIos, 'TODO_COWORK_REVENUECAT_PUBLIC_IOS_KEY');
-  assert.equal(eas.submit.production.ios.ascAppId, 'TODO_COWORK_ASC_APP_ID');
+  assert.equal(app.extra.revenueCatApiKeyIos, 'appl_rXkJBNNdImKNPGiWKuHznPFxTvK');
+  assert.match(app.extra.revenueCatApiKeyIos, /^appl_[A-Za-z0-9]+$/, 'the public iOS SDK key, so purchases turn on');
+  assert.equal(eas.submit.production.ios.ascAppId, '6840171425');
+  assert.equal(app.extra.eas.projectId, 'TODO_COWORK_EAS_PROJECT_ID', 'still to come from Cowork');
   assert.match(read('src/purchases.ts'), /!apiKey\.startsWith\('appl_'\)/, 'with the placeholder in place, purchases stay off instead of configuring junk');
   assert.match(read('.eas/workflows/deploy.yml'), /branches: \['main'\]/, 'nothing builds from a branch');
 });

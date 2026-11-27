@@ -2,6 +2,11 @@
 
 Newest first. One entry per commit: date, version/build, what changed and why, and how it was checked.
 
+- 2026-11-27: 1.0.0 build 1, setup values from Cowork (same branch and PR 1, no merge, no EAS; version and build number unchanged).
+  - app.json `extra.revenueCatApiKeyIos` is the public RevenueCat iOS SDK key (starts with `appl_`), so src/purchases.ts configures RevenueCat and the paywalls show the store's products. eas.json `ascAppId` is 6840171425, and the website's App Store links (docs/index.html, the button and the structured data) point at apps.apple.com/app/id6840171425. store/metadata.md and CLAUDE.md say the same.
+  - Still a placeholder: app.json `extra.eas.projectId` (TODO_COWORK_EAS_PROJECT_ID); Cowork sends it later.
+  - Checked: `npx tsc --noEmit` clean; `npm test` passing (the config test now checks the key, its `appl_` start, the app id, the website link, and that the project id is still the marked placeholder); `npx expo config --type introspect` shows the key and `ios.entitlements` `{}`.
+
 - 2026-11-27: 1.0.0 build 1, the app icon (same branch and PR 1, no merge, no EAS; version and build number unchanged).
   - Brian picked option 1, Folio: a white page with a folded corner on the teal, text lines above code brackets. store/icon.js `CHOSEN = 'folio'`, and `node store/icon.js` wrote assets/icon.png (1024x1024, RGB, no alpha, square corners), the Android adaptive foreground (on the same teal as app.json's adaptive background, #0B6E66), both splash icons, the favicon, docs/apple-touch-icon.png and docs/icon-512.png. The website's logo alt text now says what the icon shows. No app screen draws the icon, so no render changed; the option sheet stays in docs/design.
   - Brian's decisions on the five open calls: all stay as they are (the fourth-file paywall at most once per launch; the paywall from folders and source themes; a file shared on first launch waits behind onboarding; the reminder screen's notification ask only when a trial is offered; sample prices in the renders only).

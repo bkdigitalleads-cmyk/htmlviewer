@@ -96,5 +96,5 @@ test('website: landing, privacy, support with the FAQ whose first question is ho
   for (const f of ['', 'support.html', 'privacy.html']) assert.match(site('sitemap.xml'), new RegExp(`<loc>https://bkdigitalleads-cmyk\\.github\\.io/htmlviewer/${f.replace('.', '\\.')}</loc>`));
   assert.match(site('robots.txt'), /Sitemap: https:\/\/bkdigitalleads-cmyk\.github\.io\/htmlviewer\/sitemap\.xml/);
   for (const f of ['index.html', 'privacy.html', 'support.html']) assert.match(site(f), /href="(support|privacy)\.html"/);
-  assert.match(site('index.html'), /apps\.apple\.com\/app\/idTODO_COWORK_ASC_APP_ID/, 'the App Store link waits for the app id');
+  assert.match(site('index.html'), /apps\.apple\.com\/app\/id6840171425/, 'the App Store link uses the app id from Cowork');
 });
